@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar'; // Importar módulo de la barra de herramientas
+import { MatButtonModule } from '@angular/material/button';  // Importar módulo de botones
+import { RouterModule } from '@angular/router';             // Importar RouterModule para los enlaces
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [MatToolbarModule, MatButtonModule, RouterModule], // Añadir los módulos necesarios
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css'] // Fíjate que debe ser styleUrls (plural)
 })
-export class HeaderComponent {
-
-}
+export class HeaderComponent {}
