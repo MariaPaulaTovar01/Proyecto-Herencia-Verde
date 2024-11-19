@@ -1,0 +1,25 @@
+name: Angular Build
+
+on:
+  push:
+    branches:
+      - main  # Se ejecutará al hacer push en la rama main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Ejecuta el workflow en un entorno Linux (Windows no es necesario para CI)
+
+    steps:
+      # Clona el código del repositorio
+      - uses: actions/checkout@v2
+
+      # Configura Node.js para la construcción
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20  # Usa la versión de Node.js que tienes instalada
+
+      # Instala las dependencias del proyecto
+      - run: npm install
+
+      # Construye la aplicación Angular
+      - run: npm run build
