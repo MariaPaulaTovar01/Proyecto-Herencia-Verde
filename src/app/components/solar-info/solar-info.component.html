@@ -5,39 +5,53 @@
         La energía solar es una fuente de energía renovable que juega un papel crucial en la transición hacia un futuro sostenible.
       </p>
     </header>
+
   
-    <section class="solar-content">
-      <article class="info-section">
-        <h2>Definición</h2>
+    <!-- Secciones de contenido con mat-expansion-panel -->
+    <mat-accordion #accordion class="solar-content">
+      <!-- Definición -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Definición</mat-panel-title>
+        </mat-expansion-panel-header>
         <p>
           La energía solar es la radiación que el Sol emite y que puede ser capturada para convertirla en energía térmica o eléctrica mediante tecnologías específicas.
         </p>
-      </article>
+      </mat-expansion-panel>
   
-      <article class="info-section">
-        <h2>Ventajas</h2>
+      <!-- Ventajas -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Ventajas</mat-panel-title>
+        </mat-expansion-panel-header>
         <ul>
           <li>Es una fuente inagotable y limpia.</li>
           <li>Reduce la dependencia de combustibles fósiles.</li>
           <li>Contribuye a la mitigación del cambio climático.</li>
         </ul>
-      </article>
+      </mat-expansion-panel>
   
-      <article class="info-section">
-        <h2>Desventajas</h2>
+      <!-- Desventajas -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Desventajas</mat-panel-title>
+        </mat-expansion-panel-header>
         <ul>
           <li>Dependencia de condiciones climáticas.</li>
           <li>Costes iniciales elevados.</li>
           <li>Requiere espacio para instalación de paneles.</li>
         </ul>
-      </article>
+      </mat-expansion-panel>
   
-      <article class="info-section">
-        <h2>Impacto Ambiental</h2>
+      <!-- Impacto Ambiental -->
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Impacto Ambiental</mat-panel-title>
+        </mat-expansion-panel-header>
         <p>
           Aunque su impacto ambiental es mínimo comparado con otras fuentes, la producción y desecho de paneles solares puede generar residuos si no se gestionan adecuadamente.
         </p>
-      </article>
-    </section>
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
   
