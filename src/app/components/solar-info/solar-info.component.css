@@ -1,56 +1,54 @@
-/* Contenedor principal */
 .solar-info-container {
-    font-family: 'Arial', sans-serif;
-    color: #2c3e50;
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 800px;
-    line-height: 1.6;
-  }
-  
-  /* Encabezado */
-  .solar-header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .solar-header h1 {
-    font-size: 2.5rem;
-    color: #27ae60;
-    margin-bottom: 10px;
-  }
-  
-  .solar-header p {
-    font-size: 1.2rem;
-    color: #34495e;
-  }
-  
-  /* Secciones de contenido */
-  .solar-content {
-    margin-top: 20px;
-  }
-  
-  .info-section {
-    margin-bottom: 30px;
-  }
-  
-  .info-section h2 {
-    font-size: 1.8rem;
-    color: #27ae60;
-    border-bottom: 2px solid #2ecc71;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .info-section p,
-  .info-section ul {
-    font-size: 1rem;
-    color: #34495e;
-    margin: 0;
-  }
-  
-  .info-section ul {
-    list-style: disc;
-    padding-left: 20px;
-  }
-  
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.solar-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: #2c3e50;
+  font-size: 2.5rem;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #34495e;
+  margin-bottom: 20px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+mat-accordion {
+  margin-top: 20px;
+}
+
+mat-expansion-panel {
+  margin-bottom: 10px;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
+mat-panel-title {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+ul li {
+  margin: 5px 0;
+  color: #7f8c8d;
+}
