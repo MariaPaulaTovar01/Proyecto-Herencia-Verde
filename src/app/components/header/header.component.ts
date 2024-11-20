@@ -1,13 +1,29 @@
 import { Component } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar'; // Importar módulo de la barra de herramientas
-import { MatButtonModule } from '@angular/material/button';  // Importar módulo de botones
-import { RouterModule } from '@angular/router';             // Importar RouterModule para los enlaces
+import { MatToolbarModule } from '@angular/material/toolbar'; // Barra de herramientas
+import { MatButtonModule } from '@angular/material/button';  // Botones
+import { MatIconModule } from '@angular/material/icon';      // Iconos
+import { RouterModule } from '@angular/router';             // Enlaces
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, RouterModule], // Añadir los módulos necesarios
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'] // Fíjate que debe ser styleUrls (plural)
+  styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  isMenuOpen = false;
+  title = 'Energía Renovable';
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  highlightLogo() {
+    this.title = '🌞 Energía Renovable 🌿';
+  }
+
+  resetLogo() {
+    this.title = 'Energía Renovable';
+  }
+}
