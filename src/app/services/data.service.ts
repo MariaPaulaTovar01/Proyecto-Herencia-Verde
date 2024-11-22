@@ -8,6 +8,7 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class DataService {
   private csvPath = 'assets/csv/01renewable-share-energy.csv';
+  private originalData: any[] = []; // Almacenar los datos originales
 
   constructor(private http: HttpClient) {}
 
@@ -17,13 +18,19 @@ export class DataService {
     return this.http.get(this.csvPath, { responseType: 'text' }).pipe(
       map((data) => {
         console.log('Archivo CSV cargado con éxito.');
-        return this.csvToJson(data);
+        const jsonData = this.csvToJson(data);
+        this.originalData = jsonData; // Guardamos los datos originales
+        return jsonData;
       }),
       catchError((error) => {
         console.error('Error al cargar el archivo CSV:', error);
         return of([]); // Retorna un array vacío en caso de error
       })
     );
+  }
+
+  getOriginalData(): any[] {
+    return [...this.originalData]; // Devuelve una copia de los datos originales
   }
 
   private csvToJson(csv: string): any[] {
