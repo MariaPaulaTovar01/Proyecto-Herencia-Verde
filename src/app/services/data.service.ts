@@ -1,95 +1,47 @@
 import { Injectable } from '@angular/core';
-import * as Papa from 'papaparse';
-import { RenewableData } from '../interface/RenewableData';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
-  private rawData: RenewableData[] = []; // Almacena los datos originales cargados del CSV
+  private csvPath = 'assets/csv/01renewable-share-energy.csv';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  /**
-   * Carga y procesa un archivo CSV.
-   * @param file Archivo CSV seleccionado por el usuario.
-   * @returns Una promesa con los datos procesados.
-   */
-  loadCSV(file: File): Promise<RenewableData[]> {
-    return new Promise((resolve, reject) => {
-      Papa.parse(file, {
-        header: true, // Interpretar la primera fila como encabezados
-        skipEmptyLines: true, // Ignorar líneas vacías
-        complete: (result) => {
-          this.rawData = result.data.map((row: any) => ({
-            entity: row['Entity'] || '',
-            code: row['Code'] || null,
-            year: +row['Year'], // Convertir a número
-            renewables: +row['Renewables (% equivalent primary energy)'], // Convertir a número
-          }));
-          resolve(this.rawData);
-        },
-        error: (error) => reject(error),
+  getCsvData(): Observable<any[]> {
+    console.log(`Intentando cargar archivo CSV desde: ${this.csvPath}`);
+
+    return this.http.get(this.csvPath, { responseType: 'text' }).pipe(
+      map((data) => {
+        console.log('Archivo CSV cargado con éxito.');
+        return this.csvToJson(data);
+      }),
+      catchError((error) => {
+        console.error('Error al cargar el archivo CSV:', error);
+        return of([]); // Retorna un array vacío en caso de error
+      })
+    );
+  }
+
+  private csvToJson(csv: string): any[] {
+    try {
+      const lines = csv.split('\n').filter((line) => line.trim().length > 0); // Elimina líneas vacías
+      const headers = lines[0].split(',').map((header) => header.trim());
+      const data = lines.slice(1).map((line) => {
+        const values = line.split(',').map((value) => value.trim());
+        return headers.reduce((acc, header, index) => {
+          acc[header] = values[index] || null; // Asigna null si el valor no existe
+          return acc;
+        }, {} as any);
       });
-    });
-  }
-
-  /**
-   * Obtiene todos los datos cargados.
-   * @returns Array con los datos originales.
-   */
-  getData(): RenewableData[] {
-    return this.rawData;
-  }
-
-  /**
-   * Filtra los datos por una región específica (Entity).
-   * @param region Nombre de la región a filtrar.
-   * @returns Array filtrado por región.
-   */
-  filterByRegion(region: string): RenewableData[] {
-    return this.rawData.filter((row) =>
-      row.entity.toLowerCase().includes(region.toLowerCase())
-    );
-  }
-
-  /**
-   * Filtra los datos por un rango de años.
-   * @param startYear Año inicial del rango.
-   * @param endYear Año final del rango.
-   * @returns Array filtrado por rango de años.
-   */
-  filterByYearRange(startYear: number, endYear: number): RenewableData[] {
-    return this.rawData.filter(
-      (row) => row.year >= startYear && row.year <= endYear
-    );
-  }
-
-  /**
-   * Ordena los datos por una columna específica.
-   * @param column Nombre de la columna a ordenar.
-   * @param direction Dirección de orden: 'asc' (ascendente) o 'desc' (descendente).
-   * @returns Array ordenado.
-   */
-  sortData(column: keyof RenewableData, direction: 'asc' | 'desc'): RenewableData[] {
-    return [...this.rawData].sort((a, b) => {
-      if (a[column]! < b[column]!) return direction === 'asc' ? -1 : 1;
-      if (a[column]! > b[column]!) return direction === 'asc' ? 1 : -1;
-      return 0;
-    });
-  }
-
-  /**
-   * Calcula el promedio de energía renovable por región.
-   * @param region Región específica para calcular el promedio.
-   * @returns Promedio de energía renovable para la región.
-   */
-  calculateAverageRenewables(region: string): number {
-    const filteredData = this.filterByRegion(region);
-    const total = filteredData.reduce(
-      (sum, row) => sum + row.renewables,
-      0
-    );
-    return filteredData.length ? total / filteredData.length : 0;
+      console.log('Datos procesados desde el CSV:', data);
+      return data;
+    } catch (error) {
+      console.error('Error al procesar el archivo CSV:', error);
+      return [];
+    }
   }
 }
