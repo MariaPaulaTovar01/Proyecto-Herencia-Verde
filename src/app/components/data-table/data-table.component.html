@@ -1,2 +1,20 @@
-<p>data-table works!</p>
+<div *ngIf="loading" class="loading-message">
+  <p>Cargando datos, por favor espera...</p>
+</div>
 
+<div *ngIf="error" class="error-message">
+  <p>Error al cargar los datos. Por favor, verifica la consola para más detalles.</p>
+</div>
+
+<div *ngIf="!loading && !error" class="table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Definir columnas dinámicamente -->
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+      <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
