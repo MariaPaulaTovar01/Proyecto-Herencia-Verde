@@ -4,7 +4,6 @@
   </div>
 
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-    <!-- Filtros dinámicos -->
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ column }}
@@ -26,8 +25,10 @@
   </table>
 
   <mat-paginator
-    [pageSize]="5"
-    [pageSizeOptions]="[5, 10, 25]"
-    showFirstLastButtons
-  ></mat-paginator>
+  #paginator
+  [pageSize]="5"
+  [pageSizeOptions]="[5, 10, 25]"
+  showFirstLastButtons
+></mat-paginator>
+
 </div>
