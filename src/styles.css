@@ -1,13 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Variables de color */
+:root {
+  --color1: #2a7e1e;
+  --color2: #4e9e3f;
+  --color3: #72be61;
+  --color4: #96df82;
+  --color5: #baffa3;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  /* Tipografía */
+  --font-family-base: 'BauhausModern', 'Roboto', "Helvetica Neue", sans-serif;
+  --font-family-heading: 'BauhausModern', 'Roboto', sans-serif;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  /* Espaciado */
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Reset global */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font-family-base);
+  background-color: var(--color5);
+  color: var(--color1);
+}
+
+/* Tipografía base */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  color: var(--color2);
+}
+
+p, span, li {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Espaciado general */
+.container {
+  padding: var(--space-md);
+  margin: auto;
+  max-width: 1200px;
+}

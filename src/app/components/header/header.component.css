@@ -1,103 +1,113 @@
+/* General Toolbar Styles */
 .header-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .header-toolbar:hover {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Efecto elevado */
-  }
-  
-  .toolbar-left {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-right: 1rem;
-    color: white;
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .logo:hover {
-    color: #ffeb3b; /* Amarillo brillante */
-    transform: scale(1.1);
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  background-color: #2a7e1e; /* Fondo actualizado */
+  color: white; /* Asegurar visibilidad del texto */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  font-family: 'BauhausModern', var(--font-family-base);
+}
+
+.header-toolbar.scrolled {
+  background-color: rgba(42, 126, 30, 0.8); /* Fondo semi-transparente */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-toolbar:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo */
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-right: 1rem;
+  color: white;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.logo:hover {
+  color: var(--color3);
+  transform: scale(1.1);
+}
+
+.header-toolbar.scrolled .logo {
+  color: white; /* Cambio de color al hacer scroll */
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: white;
+  border-radius: 4px;
+  padding: 0.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color3);
+}
+
+.nav-links a.active {
+  border-bottom: 2px solid white;
+}
+
+/* Mobile Navigation */
+.menu-button {
+  display: none;
+}
+
+.nav-links.mobile {
+  flex-direction: column;
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  width: 100%;
+  background-color: #2a7e1e;
+  z-index: 10;
+  padding: 1rem 0;
+  animation: slideDown 0.3s ease;
+}
+
+.nav-links.mobile a {
+  padding: 0.5rem 1rem;
+}
+
+@media (max-width: 768px) {
   .nav-links {
-    display: flex;
-    gap: 1rem;
-    transition: all 0.3s ease;
-  }
-  
-  .nav-links a {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: white;
-    border-radius: 4px; /* Bordes redondeados */
-    padding: 0.5rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil */
-    color: #ffeb3b; /* Amarillo brillante */
-  }
-  
-  .nav-links a.active {
-    border-bottom: 2px solid #ffffff;
-    background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil */
-  }
-  
-  .menu-button {
     display: none;
   }
-  
+
+  .menu-button {
+    display: inline-block;
+  }
+
   .nav-links.mobile {
-    flex-direction: column;
-    position: absolute;
-    top: 4rem;
-    left: 0;
-    width: 100%;
-    background-color: #041525; /* Primary color */
-    z-index: 10;
-    padding: 1rem 0;
-    animation: slideDown 0.3s ease; /* Animación de apertura */
+    display: flex;
   }
-  
-  .nav-links.mobile a {
-    padding: 0.5rem 1rem;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20%);
   }
-  
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none;
-    }
-  
-    .menu-button {
-      display: inline-block;
-    }
-  
-    .nav-links.mobile {
-      display: flex;
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
+}

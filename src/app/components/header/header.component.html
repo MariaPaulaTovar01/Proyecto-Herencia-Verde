@@ -1,29 +1,29 @@
-<mat-toolbar color="primary" class="header-toolbar">
+<mat-toolbar color="primary" class="header-toolbar" [ngClass]="{'scrolled': isScrolled}">
   <!-- Logo -->
   <div class="toolbar-left">
     <span class="logo" (mouseover)="highlightLogo()" (mouseout)="resetLogo()">{{ title }}</span>
   </div>
 
-  <!-- Botón Hamburguesa para móviles -->
+  <!-- Botón Hamburguesa (Móvil) -->
   <button mat-icon-button class="menu-button" aria-label="Abrir menú" (click)="toggleMenu()">
     <mat-icon>menu</mat-icon>
   </button>
 
   <!-- Navegación -->
-  <nav class="nav-links" [class.mobile]="isMenuOpen">
-    <a mat-button routerLink="/" routerLinkActive="active" aria-label="Inicio">
+  <nav class="nav-links" [class.mobile]="isMenuOpen" role="navigation">
+    <a mat-button routerLink="/" routerLinkActive="active" aria-label="Inicio" (click)="closeMenu()">
       <mat-icon>home</mat-icon> Inicio
     </a>
-    <a mat-button routerLink="/energia-solar" routerLinkActive="active" aria-label="Energía Solar">
+    <a mat-button routerLink="/energia-solar" routerLinkActive="active" aria-label="Energía Solar" (click)="closeMenu()">
       <mat-icon>wb_sunny</mat-icon> Energía Solar
     </a>
-    <a mat-button routerLink="/datos-historicos" routerLinkActive="active" aria-label="Datos Históricos">
+    <a mat-button routerLink="/datos-historicos" routerLinkActive="active" aria-label="Datos Históricos" (click)="closeMenu()">
       <mat-icon>table_chart</mat-icon> Datos Históricos
     </a>
-    <a mat-button routerLink="/estimador" routerLinkActive="active" aria-label="Estimador">
+    <a mat-button routerLink="/estimador" routerLinkActive="active" aria-label="Estimador" (click)="closeMenu()">
       <mat-icon>calculate</mat-icon> Estimador
     </a>
-    <a mat-button routerLink="/dashboard" routerLinkActive="active" aria-label="Dashboard">
+    <a mat-button routerLink="/dashboard" routerLinkActive="active" aria-label="Dashboard" (click)="closeMenu()">
       <mat-icon>dashboard</mat-icon> Dashboard
     </a>
   </nav>
