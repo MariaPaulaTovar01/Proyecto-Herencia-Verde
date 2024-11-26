@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,4 +8,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css'],
 })
-export class FooterComponent {}
+export class FooterComponent {
+  isDockVisible = true;
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    this.isDockVisible = scrollTop <300; // Cambiar según el comportamiento deseado
+  }
+}
