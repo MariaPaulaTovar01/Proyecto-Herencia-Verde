@@ -9,6 +9,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { FormsModule } from '@angular/forms'; // Importar para usar ngModel
 
 @Component({
   selector: 'app-data-table',
@@ -22,6 +23,7 @@ import { MatOptionModule } from '@angular/material/core';
     MatPaginatorModule,
     MatSelectModule,
     MatOptionModule,
+    FormsModule, // Agregar FormsModule para usar ngModel
   ],
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css'],
@@ -33,6 +35,7 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   error = false; // Indicador de error
   columnFilters: { [key: string]: string[] } = {}; // Opciones de filtro por columna
   appliedFilters: { [key: string]: string } = {}; // Filtros aplicados
+  selectedFilters: { [key: string]: string | null } = {}; // Valores seleccionados para los filtros
 
   @ViewChild(MatSort) sort!: MatSort; // Referencia al ordenamiento
   @ViewChild(MatPaginator) paginator!: MatPaginator; // Referencia al paginador
@@ -69,7 +72,6 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-
   ngAfterViewInit(): void {
     // Asegurarte de que los cambios están reflejados
     this.cdr.detectChanges();
@@ -83,13 +85,15 @@ export class DataTableComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   private initializeFilters(data: any[]): void {
     // Inicializa los filtros únicos por columna
     this.displayedColumns.forEach((column) => {
       this.columnFilters[column] = Array.from(
         new Set(data.map((row) => row[column]))
       ).filter((value) => value !== null && value !== undefined);
+
+      // Inicializa los valores seleccionados como null
+      this.selectedFilters[column] = null;
     });
   }
 
@@ -102,6 +106,11 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   clearFilters(): void {
     // Limpia todos los filtros
     this.appliedFilters = {};
+    this.selectedFilters = {}; // Reinicia los valores seleccionados
+    this.displayedColumns.forEach((column) => {
+      this.selectedFilters[column] = null;
+    });
+
     this.dataSource.data = this.dataService.getOriginalData();
     this.dataSource.paginator?.firstPage();
   }
