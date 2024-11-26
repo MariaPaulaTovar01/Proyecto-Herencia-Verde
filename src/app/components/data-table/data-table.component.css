@@ -1,8 +1,8 @@
 /* Estilo general para la tabla */
 .table-container {
   padding: 20px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(246, 248, 252, 0.5)), 
-              url('./../../assets/img/FOND0.jpg'); /* Cambia 'ruta/a/tu-imagen.jpg' por la URL de tu imagen */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(246, 248, 252, 0.2)), 
+              url('./../../assets/img/fondo.jpg'); /* Cambia 'ruta/a/tu-imagen.jpg' por la URL de tu imagen */
   background-size: cover; /* Ajusta la imagen para que cubra todo el contenedor */
   background-position: center; /* Centra la imagen en el contenedor */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -37,8 +37,8 @@
 .filters-container button {
   margin-left: 15px;
   padding: 10px 20px;
-  background-color: #4e9e3f; /* Color verde principal */
-  color: #fff;
+  background-color: #fff; /* Color verde principal */
+  color: #000000;
   font-weight: bold;
   border-radius: 30px;
   border: none;
@@ -50,7 +50,7 @@
 }
 
 .filters-container button:hover {
-  background-color: #72be61; /* Color verde claro para hover */
+  background-color: #f7fafc; /* Color verde claro para hover */
   box-shadow: 0 8px 16px rgba(78, 158, 63, 0.5);
 }
 
