@@ -28,26 +28,21 @@
       </div>
   
       <!-- Columna 3: Redes Sociales -->
-      <div class="footer-column">
-        <h3>Síguenos</h3>
-        <div class="social-icons">
-          <a href="https://facebook.com" target="_blank" aria-label="Facebook">
-            <i class="fab fa-facebook"></i>
-          </a>
-          <a href="https://x.com" target="_blank" aria-label="X">
-            <i class="fab fa-x-twitter"></i>
-          </a>
-          <a href="https://instagram.com" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-          </a>
-        </div>
+      <div class="social-dock" *ngIf="isDockVisible">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://x.com" target="_blank" aria-label="X">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
       </div>
-  
     </div>
-  
     <!-- Separador -->
     <hr class="divider">
   
