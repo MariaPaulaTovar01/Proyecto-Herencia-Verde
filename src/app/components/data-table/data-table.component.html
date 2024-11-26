@@ -8,6 +8,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ column }}
         <mat-select
+          [(ngModel)]="selectedFilters[column]"
           placeholder="Filtrar"
           *ngIf="columnFilters[column]?.length"
           (selectionChange)="applyFilter(column, $event.value)"
@@ -25,10 +26,9 @@
   </table>
 
   <mat-paginator
-  #paginator
-  [pageSize]="5"
-  [pageSizeOptions]="[5, 10, 25]"
-  showFirstLastButtons
-></mat-paginator>
-
+    #paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>
