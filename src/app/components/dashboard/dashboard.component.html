@@ -1,1 +1,28 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+  <h2>Dashboard de Energía Renovable</h2>
+
+  <div class="filters">
+    <label for="region">Seleccionar Región:</label>
+    <select [(ngModel)]="filter.region" (change)="updateCharts()">
+      <option value="">Todas las regiones</option>
+      <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+    </select>
+
+    <label for="year">Seleccionar Año:</label>
+    <select [(ngModel)]="filter.year" (change)="updateCharts()">
+      <option value="">Todos los años</option>
+      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+  </div>
+
+  <div id="noDataMessage" class="no-data-message" style="display:none;">
+    <p>No hay datos disponibles para los filtros seleccionados.</p>
+  </div>
+
+  <div class="charts">
+    <canvas id="barChart"></canvas>
+    <canvas id="pieChart"></canvas>
+    <canvas id="lineChart"></canvas>
+    <canvas id="areaChart"></canvas>
+  </div>
+</div>
