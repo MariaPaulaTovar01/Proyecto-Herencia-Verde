@@ -1,1 +1,34 @@
-<p>data-table works!</p>
+<div *ngIf="!loading && !error" class="table-container">
+  <div class="filters-container">
+    <button mat-button color="warn" (click)="clearFilters()">Limpiar filtros</button>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ column }}
+        <mat-select
+          [(ngModel)]="selectedFilters[column]"
+          placeholder="Filtrar"
+          *ngIf="columnFilters[column]?.length"
+          (selectionChange)="applyFilter(column, $event.value)"
+        >
+          <mat-option *ngFor="let value of columnFilters[column]" [value]="value">
+            {{ value }}
+          </mat-option>
+        </mat-select>
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator
+    #paginator
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

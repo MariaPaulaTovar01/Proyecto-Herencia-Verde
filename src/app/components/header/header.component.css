@@ -1,0 +1,127 @@
+/* General Toolbar Styles */
+.header-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinea los elementos al inicio vertical */
+  width: 100%; /* Asegura que el navbar ocupe todo el ancho */
+  padding: 1rem 1rem 0; /* Espaciado superior e inferior */
+  background: linear-gradient(
+    rgba(1, 22, 5, 0.0), /* Capa verde semitransparente */
+    rgba(1, 22, 5, 11)
+    ),
+    url('../../assets/img/header.jpg');
+  background-size: cover; 
+  background-position: center center; 
+  color: white; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  font-family: 'BauhausModern', var(--font-family-base);
+  height: 350px; /* Altura ajustable del navbar */
+  z-index: 1000; /* Asegurar que está encima de otros elementos */
+  position: relative; /* Por si necesitas ajustar contenido superpuesto */
+}
+
+/* Cambiar fondo cuando se hace scroll */
+.header-toolbar.scrolled {
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro al hacer scroll */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header-toolbar:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.logo-img {
+  height: 60px; /* Ajusta el tamaño del logo según sea necesario */
+  margin-top: 0.5rem; /* Alineación superior */
+  transition: transform 0.3s ease;
+  margin-left: 1rem; /* Ajusta el espacio hacia la derecha */
+
+}
+
+.logo-img:hover {
+  transform: scale(1.2);
+}
+
+.header-toolbar.scrolled .logo {
+  color: white; /* Cambio de color al hacer scroll */
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem; /* Ajustar espacio superior */
+  transition: all 0.3s ease;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: white;
+  border-radius: 4px;
+  padding: 0.5rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: normal;
+
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color3);
+}
+
+.nav-links a.active {
+  border-bottom: 2px solid white;
+}
+
+/* Mobile Navigation */
+.menu-button {
+  display: none;
+  margin-top: 0.5rem; /* Espacio superior para alinearse */
+}
+
+.nav-links.mobile {
+  flex-direction: column;
+  position: absolute;
+  top: 4rem;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semi-transparente en móviles */
+  z-index: 10;
+  padding: 1rem 0;
+  animation: slideDown 0.3s ease;
+}
+
+.nav-links.mobile a {
+  padding: 0.5rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-button {
+    display: inline-block;
+  }
+
+  .nav-links.mobile {
+    display: flex;
+  }
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+}
