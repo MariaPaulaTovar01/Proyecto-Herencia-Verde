@@ -2,12 +2,6 @@
 
 /* Variables de color */
 :root {
-  --color1: #2a7e1e;
-  --color2: #4e9e3f;
-  --color3: #72be61;
-  --color4: #96df82;
-  --color5: #baffa3;
-
   /* Tipografía */
   --font-family-base: 'BauhausModern', 'Roboto', "Helvetica Neue", sans-serif;
   --font-family-heading: 'BauhausModern', 'Roboto', sans-serif;
