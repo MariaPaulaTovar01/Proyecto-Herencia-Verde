@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public years: number[] = [];
   public csvData: any[] = [];
 
+  
+
   constructor(
     private dataService: DataService,
     private calculationService: CalculationService
