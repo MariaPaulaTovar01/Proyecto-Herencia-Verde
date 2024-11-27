@@ -2,17 +2,28 @@
 .header-toolbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-  background-color: #2a7e1e; /* Fondo actualizado */
-  color: white; /* Asegurar visibilidad del texto */
+  align-items: flex-start; /* Alinea los elementos al inicio vertical */
+  width: 100%; /* Asegura que el navbar ocupe todo el ancho */
+  padding: 1rem 1rem 0; /* Espaciado superior e inferior */
+  background: linear-gradient(
+    rgba(1, 22, 5, 0.0), /* Capa verde semitransparente */
+    rgba(1, 22, 5, 11)
+    ),
+    url('../../assets/img/header.jpg');
+  background-size: cover; 
+  background-position: center center; 
+  color: white; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
   font-family: 'BauhausModern', var(--font-family-base);
+  height: 350px; /* Altura ajustable del navbar */
+  z-index: 1000; /* Asegurar que está encima de otros elementos */
+  position: relative; /* Por si necesitas ajustar contenido superpuesto */
 }
 
+/* Cambiar fondo cuando se hace scroll */
 .header-toolbar.scrolled {
-  background-color: rgba(42, 126, 30, 0.8); /* Fondo semi-transparente */
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro al hacer scroll */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -25,6 +36,7 @@
   font-size: 1.8rem;
   font-weight: bold;
   margin-right: 1rem;
+  margin-top: 0.5rem; /* Ajustar espacio superior */
   color: white;
   transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -42,6 +54,7 @@
 .nav-links {
   display: flex;
   gap: 1rem;
+  margin-top: 0.5rem; /* Ajustar espacio superior */
   transition: all 0.3s ease;
 }
 
@@ -68,6 +81,7 @@
 /* Mobile Navigation */
 .menu-button {
   display: none;
+  margin-top: 0.5rem; /* Espacio superior para alinearse */
 }
 
 .nav-links.mobile {
@@ -76,7 +90,7 @@
   top: 4rem;
   left: 0;
   width: 100%;
-  background-color: #2a7e1e;
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semi-transparente en móviles */
   z-index: 10;
   padding: 1rem 0;
   animation: slideDown 0.3s ease;
