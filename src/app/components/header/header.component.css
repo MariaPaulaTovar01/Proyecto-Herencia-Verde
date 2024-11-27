@@ -31,19 +31,16 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Logo */
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-right: 1rem;
-  margin-top: 0.5rem; /* Ajustar espacio superior */
-  color: white;
-  transition: color 0.3s ease, transform 0.3s ease;
+.logo-img {
+  height: 60px; /* Ajusta el tamaño del logo según sea necesario */
+  margin-top: 0.5rem; /* Alineación superior */
+  transition: transform 0.3s ease;
+  margin-left: 1rem; /* Ajusta el espacio hacia la derecha */
+
 }
 
-.logo:hover {
-  color: var(--color3);
-  transform: scale(1.1);
+.logo-img:hover {
+  transform: scale(1.2);
 }
 
 .header-toolbar.scrolled .logo {
@@ -67,6 +64,8 @@
   border-radius: 4px;
   padding: 0.5rem;
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: normal;
+
 }
 
 .nav-links a:hover {
@@ -124,4 +123,5 @@
     opacity: 1;
     transform: translateY(0);
   }
+  
 }

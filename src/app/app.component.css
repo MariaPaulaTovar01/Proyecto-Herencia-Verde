@@ -11,9 +11,24 @@
 .container {
   flex: 1;
   padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
 }
 
 /* Ajuste para Angular Material */
 .mat-typography {
   font-family: var(--font-family-base);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-sm); /* Reduce padding en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--space-xs); /* Aún más pequeño en dispositivos muy pequeños */
+  }
 }

@@ -3,18 +3,17 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Import this to access ngClass
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterModule, CommonModule], // Add CommonModule here
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
   isMenuOpen = false;
-  title = 'Energía Renovable';
   isScrolled = false;
 
   toggleMenu() {
@@ -25,14 +24,6 @@ export class HeaderComponent {
     if (this.isMenuOpen) {
       this.isMenuOpen = false;
     }
-  }
-
-  highlightLogo() {
-    this.title = '🌞 Energía Renovable 🌿';
-  }
-
-  resetLogo() {
-    this.title = 'Energía Renovable';
   }
 
   @HostListener('window:scroll', [])
