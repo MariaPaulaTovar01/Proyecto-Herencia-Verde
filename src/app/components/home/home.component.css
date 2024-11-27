@@ -10,8 +10,12 @@
   /* Hero Section */
   .hero-section {
     text-align: center;
-    background: linear-gradient(to right, #6dd5ed, #2193b0);
-    color: white;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(246, 248, 252, 0.6)), 
+    url('./../../assets/img/energy.png'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+    color: #147f0c;
     padding: 50px 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -45,6 +49,7 @@
   /* Features Section */
   .features-section {
     margin-top: 50px;
+    color:#147f0c;
   }
 
   .features-section h2 {
