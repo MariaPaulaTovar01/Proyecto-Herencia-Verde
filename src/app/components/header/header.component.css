@@ -10,9 +10,9 @@
     rgba(1, 22, 5, 11)
     ),
     url('../../assets/img/header.jpg');
-  background-size: cover; 
-  background-position: center center; 
-  color: white; 
+  background-size: cover;
+  background-position: center center;
+  color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
   font-family: 'BauhausModern', var(--font-family-base);
@@ -106,6 +106,7 @@
 
   .menu-button {
     display: inline-block;
+    color: rgb(216, 216, 216);
   }
 
   .nav-links.mobile {
@@ -123,5 +124,5 @@
     opacity: 1;
     transform: translateY(0);
   }
-  
+
 }
