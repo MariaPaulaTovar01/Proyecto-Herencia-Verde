@@ -1,10 +1,12 @@
-/* src/styles.css */
-
 /* Variables de color */
 :root {
+  background: url('../src/app/assets/img/fondoglobal.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 10vh; 
+
   /* Tipografía */
-  --font-family-base: 'BauhausModern', 'Roboto', "Helvetica Neue", sans-serif;
-  --font-family-heading: 'BauhausModern', 'Roboto', sans-serif;
+  --font-family-base: 'Cocomat Light', sans-serif; /* Cuerpo del texto */
+  --font-family-heading: 'Classy Brune Reg Free', sans-serif; /* Títulos */
 
   /* Espaciado */
   --space-sm: 8px;
@@ -30,6 +32,7 @@ h1, h2, h3, h4, h5, h6 {
 p, span, li {
   font-size: 1rem;
   line-height: 1.6;
+  font-family: var(--font-family-base);
 }
 
 /* Espaciado general */
