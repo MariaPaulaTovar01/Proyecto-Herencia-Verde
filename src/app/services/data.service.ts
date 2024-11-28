@@ -7,32 +7,65 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class DataService {
-  private csvPaths: string[] = [
-    'assets/csv/01renewable-share-energy.csv',
-    'assets/csv/02modern-renewable-energy-consumption.csv',
-    'assets/csv/03modern-renewable-prod.csv',
-    'assets/csv/04share-electricity-renewables.csv',
-    'assets/csv/05hydropower-consumption.csv',
-    'assets/csv/06hydro-share-energy.csv',
-    'assets/csv/07share-electricity-hydro.csv',
-    'assets/csv/08wind-generation.csv',
-    'assets/csv/09cumulative-installed-wind-energy-capacity-gigawatts.csv',
-    'assets/csv/10wind-share-energy.csv',
-    'assets/csv/11share-electricity-wind.csv',
-    'assets/csv/12solar-energy-consumption.csv',
-    'assets/csv/13installed-solar-PV-capacity.csv',
-    'assets/csv/14solar-share-energy.csv',
-    'assets/csv/15share-electricity-solar.csv',
-    'assets/csv/16biofuel-production.csv',
-    'assets/csv/17installed-geothermal-capacity.csv',
-  ];
-
+  private readonly renewableSharePath = 'assets/csv/01renewable-share-energy.csv'; // Ruta específica para el archivo de "Renewable Share"
   private originalData: any[] = [];
+
+  private csvPaths: { [key: string]: string[] } = {
+    // Archivos necesarios para cada gráfico
+    barChart: [
+      'assets/csv/03modern-renewable-prod.csv',
+      'assets/csv/16biofuel-production.csv',
+      'assets/csv/17installed-geothermal-capacity.csv',
+    ],
+    pieChart: [
+      'assets/csv/03modern-renewable-prod.csv',
+      'assets/csv/12solar-energy-consumption.csv',
+      'assets/csv/08wind-generation.csv',
+      'assets/csv/05hydropower-consumption.csv',
+    ],
+    lineChart: [
+      'assets/csv/09cumulative-installed-wind-energy-capacity-gigawatts.csv',
+      'assets/csv/13installed-solar-PV-capacity.csv',
+      'assets/csv/17installed-geothermal-capacity.csv',
+    ],
+    areaChart: [
+      'assets/csv/02modern-renewable-energy-consumption.csv',
+      'assets/csv/05hydropower-consumption.csv',
+      'assets/csv/08wind-generation.csv',
+      'assets/csv/12solar-energy-consumption.csv',
+      'assets/csv/16biofuel-production.csv',
+    ],
+  };
 
   constructor(private http: HttpClient) {}
 
-  getCsvData(): Observable<any[]> {
-    const requests = this.csvPaths.map((path) =>
+  /**
+   * Cargar datos del archivo específico `01renewable-share-energy.csv`
+   */
+  getRenewableShareData(): Observable<any[]> {
+    return this.http.get(this.renewableSharePath, { responseType: 'text' }).pipe(
+      map((response: string) => {
+        const data = this.csvToJson(response);
+        this.originalData = data;
+        return data;
+      }),
+      catchError((error) => {
+        console.error('Error al cargar el archivo CSV:', error);
+        return of([]); // Retorna un array vacío en caso de error
+      })
+    );
+  }
+
+  /**
+   * Cargar datos necesarios para gráficos basados en el tipo de gráfico
+   */
+  getCsvDataForChart(chartType: string): Observable<any[]> {
+    const paths = this.csvPaths[chartType];
+    if (!paths) {
+      return of([]); // Si no se encuentra el tipo de gráfico, retorna un array vacío
+    }
+
+    const requests = paths.map((path) =>
       this.http.get(path, { responseType: 'text' })
     );
 
@@ -49,23 +82,9 @@ export class DataService {
     );
   }
 
-
-  // Método para cargar únicamente el primer archivo CSV
-  getFirstCsvData(): Observable<any[]> {
-    const firstPath = this.csvPaths[0]; // Toma el primer archivo
-    return this.http.get(firstPath, { responseType: 'text' }).pipe(
-      map((response: string) => {
-        const data = this.csvToJson(response);
-        this.originalData = data; // Guardar solo los datos del primer archivo
-        return data;
-      }),
-      catchError((error) => {
-        console.error('Error al cargar el primer archivo CSV:', error);
-        return of([]); // Retorna un array vacío en caso de error
-      })
-    );
-  }
-
+  /**
+   * Convertir datos en formato CSV a JSON
+   */
   private csvToJson(csv: string): any[] {
     const lines = csv.split('\n').filter((line) => line.trim().length > 0);
     const headers = lines[0].split(',').map((header) => header.trim());
@@ -78,7 +97,10 @@ export class DataService {
     });
   }
 
+  /**
+   * Obtener los datos originales cargados por el servicio
+   */
   getOriginalData(): any[] {
-    return this.originalData; // Retorna los datos originales
+    return this.originalData;
   }
 }

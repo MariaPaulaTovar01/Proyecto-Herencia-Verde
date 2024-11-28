@@ -1,25 +1,28 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Para usar ngModel
 import { CalculationService } from '../../services/calculation.service';
 import { DataService } from '../../services/data.service';
-import { FormsModule } from '@angular/forms';
-import { NgForOf, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [FormsModule, NgForOf, NgIf],
+  imports: [NgFor, NgIf, FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   public charts: Record<string, Chart<any, any[], any> | null> = {};
-  public filter: { region: string; year: number | null } = { region: '', year: null };
+  public filter = { region: '', year: null as number | null };
   public regions: string[] = [];
   public years: number[] = [];
-  public csvData: any[] = [];
-
-  
+  public csvData: Record<string, any[]> = {
+    barChart: [],
+    pieChart: [],
+    lineChart: [],
+    areaChart: [],
+  };
 
   constructor(
     private dataService: DataService,
@@ -29,132 +32,82 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit: Cargando datos iniciales');
     this.loadInitialData();
   }
 
   ngOnDestroy(): void {
-    console.log('ngOnDestroy: Destruyendo gráficos');
     this.destroyCharts();
   }
 
-  loadInitialData(): void {
-    console.log('loadInitialData: Cargando datos CSV...');
-    this.dataService.getCsvData().subscribe(
-      (data) => {
-        console.log('Datos CSV recibidos:', data);
-        this.csvData = data;
-        this.regions = this.calculationService.getUniqueRegions(data).map((region) => region.trim());
-        this.years = this.calculationService.getUniqueYears(data).map((year) => Number(year));
-        console.log('Regiones disponibles:', this.regions);
-        console.log('Años disponibles:', this.years);
+  private loadInitialData(): void {
+    // Cargar datos para cada gráfico
+    this.loadChartData('barChart');
+    this.loadChartData('pieChart');
+    this.loadChartData('lineChart');
+    this.loadChartData('areaChart');
+  }
 
-        this.updateCharts(); // Cargar gráficos con datos iniciales sin filtrar
-      },
-      (error) => {
-        console.error('Error al cargar los datos CSV:', error);
+  private loadChartData(chart: string): void {
+    this.dataService.getCsvDataForChart(chart).subscribe((data: any[]) => {
+      console.log('Datos recibidos para el gráfico', chart, data);  // Log para ver los datos
+      this.csvData[chart] = data;
+      if (chart === 'barChart') {
+        // Asignar regiones y años para los filtros usando los datos del gráfico principal
+        this.regions = this.calculationService.getUniqueRegions(data);
+        this.years = this.calculationService.getUniqueYears(data);
       }
-    );
-  }
-
-  applyFilters(): any[] {
-    let filteredData = this.csvData;
-
-    // Normaliza la comparación para regiones
-    if (this.filter.region) {
-      filteredData = filteredData.filter((item) =>
-        item.Entity.trim().toLowerCase() === this.filter.region.trim().toLowerCase()
-      );
-    }
-
-    // Usar un valor predeterminado para year si es null
-    const year = this.filter.year ?? '';  // Valor por defecto si es null o undefined
-    if (year) {
-      filteredData = filteredData.filter((item) =>
-        item.Year?.trim() === year.toString().trim()
-      );
-    }
-
-    console.log('applyFilters: Datos después de aplicar filtros:', filteredData);
-    return filteredData;
-  }
-
-
-
-
-  updateCharts(): void {
-    console.log('updateCharts: Actualizando gráficos...');
-    const filteredData = this.applyFilters();
-
-    if (!filteredData || filteredData.length === 0) {
-      console.warn('No se encontraron datos para los filtros seleccionados.');
-
-      const noDataMessage = document.getElementById('noDataMessage');
-      if (noDataMessage) noDataMessage.style.display = 'block';
-
-      this.destroyCharts();
-      this.createEmptyCharts();
-      return;
-    }
-
-    const noDataMessage = document.getElementById('noDataMessage');
-    if (noDataMessage) noDataMessage.style.display = 'none';
-
-    this.destroyCharts();
-    this.createBarChart(filteredData);
-    this.createPieChart(filteredData);
-    this.createLineChart(filteredData);
-    this.createAreaChart(filteredData);
-  }
-
-  createEmptyCharts(): void {
-    console.log('createEmptyCharts: Creando gráficos vacíos...');
-    const emptyData = [0, 0, 0, 0, 0];
-    const ctxBar = document.getElementById('barChart') as HTMLCanvasElement;
-    if (ctxBar) {
-      this.charts['barChart'] = new Chart(ctxBar.getContext('2d') as CanvasRenderingContext2D, {
-        type: 'bar',
-        data: {
-          labels: ['Empty', 'Empty', 'Empty', 'Empty', 'Empty'],
-          datasets: [
-            {
-              label: 'No Data',
-              data: emptyData,
-              backgroundColor: 'rgba(200, 200, 200, 0.5)',
-              borderColor: 'rgba(200, 200, 200, 1)',
-              borderWidth: 1,
-            },
-          ],
-        },
-      });
-    }
-  }
-
-  destroyCharts(): void {
-    console.log('destroyCharts: Destruyendo gráficos existentes...');
-    Object.keys(this.charts).forEach((key) => {
-      this.charts[key]?.destroy();
-      this.charts[key] = null;
-      console.log(`Gráfico ${key} destruido.`);
+      this.updateCharts();
     });
   }
 
-  createBarChart(data: any[]): void {
-    console.log('createBarChart: Creando gráfico de barras...');
-    const chartData = this.calculationService.getProductionDataForBarChart(data);
-    const ctx = document.getElementById('barChart') as HTMLCanvasElement;
-    if (ctx && chartData?.length) {
-      this.charts['barChart'] = new Chart(ctx.getContext('2d') as CanvasRenderingContext2D, {
+  applyFilters(): Record<string, any[]> {
+    const filteredData: Record<string, any[]> = {};
+
+    Object.keys(this.csvData).forEach((chart) => {
+      filteredData[chart] = this.csvData[chart].filter((item) => {
+        const matchesRegion = !this.filter.region ||
+          item.Entity.trim().toLowerCase() === this.filter.region.trim().toLowerCase();
+        const matchesYear = this.filter.year === null || +item.Year === +this.filter.year!;
+        return matchesRegion && matchesYear;
+      });
+    });
+
+    return filteredData;
+  }
+
+  updateCharts(): void {
+    const filteredData = this.applyFilters();
+    this.destroyCharts();
+
+    // Crear gráficos solo si hay datos
+    if (Object.values(filteredData).every((data) => !data.length)) {
+      this.createEmptyCharts();
+    } else {
+      this.createBarChart(filteredData['barChart']);
+      this.createPieChart(filteredData['pieChart']);
+      this.createLineChart(filteredData['lineChart']);
+      this.createAreaChart(filteredData['areaChart']);
+    }
+  }
+
+  private destroyCharts(): void {
+    Object.values(this.charts).forEach((chart) => chart?.destroy());
+    this.charts = {};
+  }
+
+  private createEmptyCharts(): void {
+    const ctxBar = document.getElementById('barChart') as HTMLCanvasElement | null;
+    if (ctxBar) {
+      this.charts['barChart'] = new Chart(ctxBar, {
         type: 'bar',
         data: {
-          labels: ['Wind', 'Solar', 'Hydro', 'Biofuel', 'Geothermal'],
+          labels: ['Sin datos'],
           datasets: [
             {
-              label: 'Energy Production (TWh)',
-              data: chartData,
-              backgroundColor: 'rgba(0, 123, 255, 0.5)',
-              borderColor: 'rgba(0, 123, 255, 1)',
-              borderWidth: 1,
+              label: 'No Data',
+              data: [0],
+              backgroundColor: 'rgba(200, 200, 200, 0.5)',
+              borderColor: 'rgba(200, 200, 200, 1)',
             },
           ],
         },
@@ -162,19 +115,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  createPieChart(data: any[]): void {
-    console.log('createPieChart: Creando gráfico de pie...');
-    const chartData = this.calculationService.getRenewablesShareForPieChart(data);
-    const ctx = document.getElementById('pieChart') as HTMLCanvasElement;
-    if (ctx && chartData?.length) {
-      this.charts['pieChart'] = new Chart(ctx.getContext('2d') as CanvasRenderingContext2D, {
-        type: 'pie',
+  private createBarChart(data: any[]): void {
+    const ctxBar = document.getElementById('barChart') as HTMLCanvasElement | null;
+    const productionData = this.calculationService.getProductionDataForBarChart(data);
+    if (ctxBar) {
+      this.charts['barChart'] = new Chart(ctxBar, {
+        type: 'bar',
         data: {
-          labels: ['Wind', 'Solar', 'Hydro'],
+          labels: ['Viento', 'Solar', 'Hidráulica', 'Biomasa', 'Geotérmica'],
           datasets: [
             {
-              data: chartData,
-              backgroundColor: ['#36a2eb', '#ffcd56', '#ff6384'],
+              label: 'Producción (TWh)',
+              data: productionData,
+              backgroundColor: ['#2a7e1e', '#4e9e3f', '#72be61', '#96df82', '#baffa3'],
             },
           ],
         },
@@ -182,49 +135,87 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  createLineChart(data: any[]): void {
-    console.log('createLineChart: Creando gráfico de líneas...');
-    const chartData = this.calculationService.getInstalledCapacityForLineChart(data);
-    const ctx = document.getElementById('lineChart') as HTMLCanvasElement;
-    if (ctx && chartData) {
-      this.charts['lineChart'] = new Chart(ctx.getContext('2d') as CanvasRenderingContext2D, {
+  private createPieChart(data: any[]): void {
+    const ctxPie = document.getElementById('pieChart') as HTMLCanvasElement | null;
+
+    // Verificar si los datos están vacíos y loguear la entrada de la función
+    console.log('Creando gráfico de pie con los siguientes datos:', data);
+
+    // Obtener los datos para el gráfico de pie
+    const shareData = this.calculationService.getRenewablesShareForPieChart(data);
+
+    // Loguear los datos calculados
+    console.log('Datos calculados para el gráfico de pie:', shareData);
+
+    if (ctxPie) {
+      if (shareData && shareData.length > 0) {
+        console.log('Datos del gráfico de pie:', shareData); // Verificar los datos antes de crear el gráfico
+
+        this.charts['pieChart'] = new Chart(ctxPie, {
+          type: 'pie',
+          data: {
+            labels: ['Eólica', 'Solar', 'Hidráulica'],
+            datasets: [
+              {
+                data: shareData,
+                backgroundColor: ['#2a7e1e', '#4e9e3f', '#72be61'],
+              },
+            ],
+          },
+        });
+        console.log('Gráfico de pie creado correctamente.');
+      } else {
+        console.log('No hay datos para el gráfico de pie, mostrando mensaje de no datos.');
+        // Si no hay datos, mostrar el mensaje de "No hay datos"
+        const noDataMessage = document.getElementById('noDataMessage')!;
+        noDataMessage.style.display = 'block'; // Mostrar mensaje de no datos
+      }
+    } else {
+      console.log('No se encontró el elemento canvas para el gráfico de pie.');
+    }
+  }
+
+
+
+  private createLineChart(data: any[]): void {
+    const ctxLine = document.getElementById('lineChart') as HTMLCanvasElement | null;
+    const capacityData = this.calculationService.getInstalledCapacityForLineChart(data);
+    if (ctxLine) {
+      this.charts['lineChart'] = new Chart(ctxLine, {
         type: 'line',
         data: {
-          labels: ['2000', '2005', '2010', '2015', '2020'],
+          labels: capacityData.labels,
           datasets: [
-            {
-              label: 'Wind Capacity (GW)',
-              data: chartData.wind,
-              borderColor: '#36a2eb',
-              fill: false,
-            },
-            {
-              label: 'Solar Capacity (GW)',
-              data: chartData.solar,
-              borderColor: '#ffcd56',
-              fill: false,
-            },
+            { label: 'Viento', data: capacityData.wind, borderColor: '#2a7e1e' },
+            { label: 'Solar', data: capacityData.solar, borderColor: '#4e9e3f' },
+            { label: 'Geotérmica', data: capacityData.geothermal, borderColor: '#72be61' },
           ],
         },
       });
     }
   }
 
-  createAreaChart(data: any[]): void {
-    console.log('createAreaChart: Creando gráfico de área...');
-    const chartData = this.calculationService.getEnergyConsumptionComparisonForAreaChart(data);
-    const ctx = document.getElementById('areaChart') as HTMLCanvasElement;
-    if (ctx && chartData) {
-      this.charts['areaChart'] = new Chart(ctx.getContext('2d') as CanvasRenderingContext2D, {
+  private createAreaChart(data: any[]): void {
+    const ctxArea = document.getElementById('areaChart') as HTMLCanvasElement | null;
+    const energyData = this.calculationService.getEnergyConsumptionComparisonForAreaChart(data);
+    if (ctxArea) {
+      this.charts['areaChart'] = new Chart(ctxArea, {
         type: 'line',
         data: {
-          labels: ['2000', '2005', '2010', '2015', '2020'],
+          labels: energyData.labels,
           datasets: [
             {
-              label: 'Renewable Consumption (TWh)',
-              data: chartData.renewable,
-              borderColor: '#36a2eb',
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              label: 'Renovable',
+              data: energyData.renewable,
+              backgroundColor: 'rgba(42, 126, 30, 0.2)',
+              borderColor: '#2a7e1e',
+              fill: true,
+            },
+            {
+              label: 'Convencional',
+              data: energyData.conventional,
+              backgroundColor: 'rgba(78, 158, 63, 0.2)',
+              borderColor: '#4e9e3f',
               fill: true,
             },
           ],

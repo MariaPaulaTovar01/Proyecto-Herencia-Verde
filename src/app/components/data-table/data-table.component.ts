@@ -43,19 +43,16 @@ export class DataTableComponent implements OnInit, AfterViewInit {
   constructor(private dataService: DataService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.dataService.getFirstCsvData().subscribe({
+    this.dataService.getRenewableShareData().subscribe({
       next: (data) => {
         this.loading = false;
 
         if (data.length > 0) {
-          // Dinámicamente determinar columnas
           this.displayedColumns = Object.keys(data[0]);
           this.initializeFilters(data);
 
-          // Configurar datos en el DataSource
           this.dataSource.data = data;
 
-          // Configurar el paginador y ordenamiento
           setTimeout(() => {
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
@@ -71,7 +68,6 @@ export class DataTableComponent implements OnInit, AfterViewInit {
       },
     });
   }
-
 
   ngAfterViewInit(): void {
     this.cdr.detectChanges();
