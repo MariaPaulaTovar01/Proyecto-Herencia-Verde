@@ -13,7 +13,6 @@ export interface EnergyData {
 export class CalculationService {
   constructor() {}
 
-  // Convertir string a número (retorna 0 si no es convertible)
   private toNumber(value: any): number {
     return isNaN(Number(value)) ? 0 : Number(value);
   }
@@ -40,7 +39,9 @@ export class CalculationService {
     return this.getUniqueValues(data, 'Year') as number[];
   }
 
-  // Métodos adicionales para gráficos
+  // Métodos para gráficos
+
+  // Gráfico de barras
   getProductionDataForBarChart(data: EnergyData[]): number[] {
     return [
       this.toNumber(data.find((item) => item['Electricity from wind (TWh)'])?.['Electricity from wind (TWh)']),
@@ -51,14 +52,29 @@ export class CalculationService {
     ];
   }
 
-  getRenewablesShareForPieChart(data: EnergyData[]): number[] {
-    return [
-      this.toNumber(data.find((item) => item['Wind (% electricity)'])?.['Wind (% electricity)']),
-      this.toNumber(data.find((item) => item['Solar (% electricity)'])?.['Solar (% electricity)']),
-      this.toNumber(data.find((item) => item['Hydro (% electricity)'])?.['Hydro (% electricity)']),
-    ];
+  // Gráfico de pastel
+  getRenewablesShareForPieChart(data: any[]): number[] {
+    // Filtrar las columnas correspondientes para cada tipo de energía renovable
+    const windEnergy = data
+      .filter(item => item['Electricity from wind (TWh)']) // Asegúrate de que esta columna existe
+      .reduce((sum, item) => sum + this.toNumber(item['Electricity from wind (TWh)']), 0);
+
+    const solarEnergy = data
+      .filter(item => item['Electricity from solar (TWh)']) // Asegúrate de que esta columna existe
+      .reduce((sum, item) => sum + this.toNumber(item['Electricity from solar (TWh)']), 0);
+
+    const hydroEnergy = data
+      .filter(item => item['Electricity from hydro (TWh)']) // Asegúrate de que esta columna existe
+      .reduce((sum, item) => sum + this.toNumber(item['Electricity from hydro (TWh)']), 0);
+
+    console.log('Eólica:', windEnergy, 'Solar:', solarEnergy, 'Hidráulica:', hydroEnergy);
+
+    return [windEnergy, solarEnergy, hydroEnergy];
   }
 
+
+
+  // Gráfico de líneas
   getInstalledCapacityForLineChart(data: EnergyData[]): any {
     const years = this.getUniqueValues(data, 'Year') as number[];
     return {
@@ -75,10 +91,7 @@ export class CalculationService {
     };
   }
 
-  filterDataByRegionAndYear(data: EnergyData[], region: string, year: number): EnergyData[] {
-    return data.filter(item => item.Entity === region && item.Year === year);
-  }
-
+  // Gráfico de área
   getEnergyConsumptionComparisonForAreaChart(data: EnergyData[]): any {
     const years = this.getUniqueValues(data, 'Year') as number[];
     return {
