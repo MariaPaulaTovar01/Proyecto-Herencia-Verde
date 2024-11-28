@@ -1,3 +1,8 @@
+<div *ngIf="loading" class="loading-container">
+  <div class="loading-spinner"></div>
+  <p>Cargando datos, por favor espera...</p>
+</div>
+
 <div *ngIf="!loading && !error" class="table-container">
   <div class="filters-container">
     <button mat-button color="warn" (click)="clearFilters()">Limpiar filtros</button>
