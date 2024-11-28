@@ -7,7 +7,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class DataService {
-  private readonly renewableSharePath = 'assets/csv/01renewable-share-energy.csv'; // Ruta específica para el archivo de "Renewable Share"
+  private readonly renewableSharePath = 'assets/csv/03modern-renewable-prod.csv'; // Ruta específica para el archivo de "Renewable Share"
   private originalData: any[] = [];
 
   private csvPaths: { [key: string]: string[] } = {
@@ -40,7 +40,7 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Cargar datos del archivo específico `01renewable-share-energy.csv`
+   * Cargar datos del archivo específico `03renewable-share-energy.csv`
    */
   getRenewableShareData(): Observable<any[]> {
     return this.http.get(this.renewableSharePath, { responseType: 'text' }).pipe(
