@@ -1,36 +1,30 @@
-/* Fondo global para toda la página */
+/* Fondo global */
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif; /* Define una fuente global si es necesario */
+  font-family: Arial, sans-serif;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(246, 248, 252, 0.2)),
-              url('./../../assets/img/fondo.jpg'); /* Cambia por la ruta de tu imagen */
-  background-size: cover; /* Ajusta la imagen para que cubra todo el viewport */
-  background-position: center; /* Centra la imagen en el viewport */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
-  height: 100vh; /* Asegura que cubra toda la altura del viewport */
-  overflow-x: hidden; /* Evita el scroll horizontal si hay desbordamiento */
+    url('./../../assets/img/fondo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Ajustes globales para el contenedor */
-html, body {
-  height: 100%; /* Asegura que el fondo cubra toda la pantalla */
-  overflow-x: hidden; /* Evita el scroll horizontal si se desborda el contenido */
-}
-
-/* Mantén los estilos de la tabla como están, pero elimina el fondo de .table-container */
+/* Contenedor principal de la tabla */
 .table-container {
   padding: 20px;
   border-radius: 12px;
   margin-top: 30px;
   max-width: 100%;
-  overflow: hidden;
+  overflow-x: auto; /* Permite desplazamiento horizontal si es necesario */
   animation: fadeIn 0.5s ease-in-out;
+  background: linear-gradient(135deg, #ffffff, #f9f9f9);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-
-
-/* Efecto de fadeIn para la tabla */
+/* Animación de aparición */
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -42,7 +36,7 @@ html, body {
   }
 }
 
-/* Estilo para el contenedor de los filtros */
+/* Contenedor de filtros */
 .filters-container {
   display: flex;
   justify-content: flex-end;
@@ -50,11 +44,10 @@ html, body {
   align-items: center;
 }
 
-/* Botón de limpiar filtros */
 .filters-container button {
   margin-left: 15px;
   padding: 10px 20px;
-  background-color: #fff; /* Color verde principal */
+  background-color: #fff;
   color: #000000;
   font-weight: bold;
   border-radius: 30px;
@@ -67,7 +60,7 @@ html, body {
 }
 
 .filters-container button:hover {
-  background-color: #f7fafc; /* Color verde claro para hover */
+  background-color: #f7fafc;
   box-shadow: 0 8px 16px rgba(78, 158, 63, 0.5);
 }
 
@@ -75,18 +68,17 @@ html, body {
   transform: scale(0.98);
 }
 
-/* Estilo para la tabla */
+/* Estilo de la tabla */
 table {
   width: 100%;
   border-collapse: collapse;
   border-radius: 12px;
   overflow: hidden;
-  background: linear-gradient(135deg, #ffffff, #f9f9f9);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para las celdas de la tabla */
-th.mat-header-cell, td.mat-cell {
+/* Estilo de celdas */
+th.mat-header-cell,
+td.mat-cell {
   padding: 16px 20px;
   text-align: left;
   font-size: 15px;
@@ -95,29 +87,17 @@ th.mat-header-cell, td.mat-cell {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Estilo para filas alternas */
-tr:nth-child(even) {
-  background-color: #f7fafc;
-}
-
-/* Estilo para las celdas en hover */
-mat-row:hover, tr:hover {
-  background-color: #eaf9e6; /* Color verde suave en hover */
-  color: #333;
-}
-
-/* Estilo para las cabeceras */
+/* Cabecera de la tabla */
 th.mat-header-cell {
-  background-color: #5ab55e; /* Verde más intenso para cabeceras */
+  background-color: #5ab55e;
   color: #fff;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding: 18px 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Agregar bordes redondeados en cabecera */
+/* Bordes redondeados para la cabecera */
 th.mat-header-cell:first-child {
   border-top-left-radius: 12px;
 }
@@ -125,7 +105,19 @@ th.mat-header-cell:last-child {
   border-top-right-radius: 12px;
 }
 
-/* Estilo para el filtro en la cabecera */
+/* Filas alternas */
+tr:nth-child(even) {
+  background-color: #f7fafc;
+}
+
+/* Hover en filas */
+mat-row:hover,
+tr:hover {
+  background-color: #eaf9e6;
+  color: #333;
+}
+
+/* Estilo para los filtros en cabecera */
 mat-select {
   width: 170px;
   margin-left: 10px;
@@ -146,7 +138,7 @@ mat-select mat-option:hover {
   color: white;
 }
 
-/* Estilo para el paginator */
+/* Estilo del paginador */
 mat-paginator {
   margin-top: 30px;
   display: flex;
@@ -161,21 +153,16 @@ mat-paginator {
   color: #666;
 }
 
-.mat-paginator-page-size {
-  font-size: 14px;
-  margin-right: 15px;
-}
-
 .mat-paginator-icon {
-  color: #4e9e3f; /* Verde para los iconos de paginación */
+  color: #4e9e3f;
   transition: color 0.3s ease;
 }
 
 .mat-paginator-icon:hover {
-  color: #72be61; /* Verde claro en hover */
+  color: #72be61;
 }
 
-/* Estilo de los botones de paginación */
+/* Botones del paginador */
 mat-paginator button.mat-button {
   border-radius: 30px;
   background-color: #4e9e3f;
@@ -186,10 +173,10 @@ mat-paginator button.mat-button {
 }
 
 mat-paginator button.mat-button:hover {
-  background-color: #72be61; /* Verde claro en hover */
+  background-color: #72be61;
 }
 
-/* Ajustes para una mejor visualización en dispositivos móviles */
+/* Responsividad */
 @media (max-width: 768px) {
   .table-container {
     padding: 15px;
@@ -199,83 +186,14 @@ mat-paginator button.mat-button:hover {
     font-size: 13px;
   }
 
-  .filters-container button {
-    font-size: 12px;
-    padding: 8px 16px;
+  th.mat-header-cell,
+  td.mat-cell {
+    padding: 12px 15px;
   }
 
   mat-select {
     width: 130px;
     font-size: 12px;
-  }
-  /* Contenedor principal de la tabla */
-.table-container {
-  padding: 20px;
-  border-radius: 12px;
-  margin-top: 30px;
-  max-width: 100%;
-  overflow-x: auto; /* Permite desplazamiento horizontal si es necesario */
-}
-
-/* Estilo para la tabla */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 12px;
-  overflow: hidden;
-  background: linear-gradient(135deg, #ffffff, #f9f9f9);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilo para las celdas */
-th.mat-header-cell, td.mat-cell {
-  padding: 16px 20px;
-  text-align: left;
-  font-size: 15px;
-  border-bottom: 1px solid #eaeaea;
-  color: #555;
-}
-
-/* Filas alternas */
-tr:nth-child(even) {
-  background-color: #f7fafc;
-}
-
-/* Hover en filas */
-tr:hover {
-  background-color: #eaf9e6;
-  color: #333;
-}
-
-/* Cabeceras */
-th.mat-header-cell {
-  background-color: #5ab55e;
-  color: #fff;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 18px 20px;
-}
-
-/* Responsividad */
-@media (max-width: 1024px) {
-  .table-container {
-    padding: 15px;
-  }
-
-  table {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 768px) {
-  th.mat-header-cell, td.mat-cell {
-    font-size: 13px;
-    padding: 12px 15px;
-  }
-
-  .table-container {
-    padding: 10px;
   }
 }
 
@@ -284,13 +202,12 @@ th.mat-header-cell {
     font-size: 12px;
   }
 
-  th.mat-header-cell, td.mat-cell {
+  th.mat-header-cell,
+  td.mat-cell {
     padding: 10px 12px;
   }
 
   .table-container {
-    padding: 5px;
+    padding: 10px;
   }
-}
-
 }
