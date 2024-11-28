@@ -2,7 +2,6 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(246, 248, 252, 0.2)),
     url('./../../assets/img/fondo.jpg');
   background-size: cover;
