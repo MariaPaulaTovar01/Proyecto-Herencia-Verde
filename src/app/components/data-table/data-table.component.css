@@ -1,212 +1,121 @@
-/* Fondo global */
-body {
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(246, 248, 252, 0.2)),
-    url('./../../assets/img/fondo.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  overflow-x: hidden;
-}
-
-/* Contenedor principal de la tabla */
-.table-container {
-  padding: 20px;
+/* Contenedor principal */
+.solar-info-container {
+  max-width: 800px;
+  margin: var(--space-md) auto;
+  padding: var(--space-md);
+  font-family: var(--font-family-base);
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo ligeramente translúcido */
   border-radius: 12px;
-  margin-top: 30px;
-  max-width: 100%;
-  overflow-x: auto; /* Permite desplazamiento horizontal si es necesario */
-  animation: fadeIn 0.5s ease-in-out;
-  background: linear-gradient(135deg, #ffffff, #f9f9f9);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Animación de aparición */
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Cabecera del componente */
+.solar-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
 }
 
-/* Contenedor de filtros */
-.filters-container {
+.solar-header h1 {
+  font-family: var(--font-family-heading);
+  color: var(--color1); /* Usando color global */
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.solar-header p {
+  font-size: 1.2rem;
+  color: var(--color3); /* Usando color global */
+  margin-bottom: var(--space-md);
+}
+
+/* Contenedor de botones */
+.buttons-container {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
-  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
-.filters-container button {
-  margin-left: 15px;
-  padding: 10px 20px;
-  background-color: #fff;
-  color: #000000;
-  font-weight: bold;
-  border-radius: 30px;
-  border: none;
-  font-size: 14px;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(78, 158, 63, 0.3);
+/* Estilo de los acordeones */
+mat-accordion {
+  margin-top: var(--space-lg);
 }
 
-.filters-container button:hover {
-  background-color: #f7fafc;
-  box-shadow: 0 8px 16px rgba(78, 158, 63, 0.5);
-}
-
-.filters-container button:active {
-  transform: scale(0.98);
-}
-
-/* Estilo de la tabla */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-/* Estilo de celdas */
-th.mat-header-cell,
-td.mat-cell {
-  padding: 16px 20px;
-  text-align: left;
-  font-size: 15px;
-  border-bottom: 1px solid #eaeaea;
-  color: #555;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Cabecera de la tabla */
-th.mat-header-cell {
-  background-color: #5ab55e;
-  color: #fff;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+mat-expansion-panel {
+  margin-bottom: var(--space-sm);
+  background: rgba(255, 255, 255, 0.9); /* Fondo translúcido */
+  border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Bordes redondeados para la cabecera */
-th.mat-header-cell:first-child {
-  border-top-left-radius: 12px;
-}
-th.mat-header-cell:last-child {
-  border-top-right-radius: 12px;
+mat-panel-title {
+  font-weight: bold;
+  font-family: var(--font-family-base);
+  color: var(--color1); /* Usando color global */
 }
 
-/* Filas alternas */
-tr:nth-child(even) {
-  background-color: #f7fafc;
+/* Listas dentro del componente */
+ul {
+  list-style-type: disc;
+  padding-left: var(--space-md);
 }
 
-/* Hover en filas */
-mat-row:hover,
-tr:hover {
-  background-color: #eaf9e6;
-  color: #333;
+ul li {
+  margin: var(--space-sm) 0;
+  color: var(--color3); /* Usando color global */
+  font-family: var(--font-family-base);
 }
 
-/* Estilo para los filtros en cabecera */
-mat-select {
-  width: 170px;
-  margin-left: 10px;
-  border-radius: 25px;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-  transition: all 0.3s ease;
-}
-
-mat-select:hover {
-  background-color: #e9ecef;
-}
-
-mat-select mat-option:hover {
-  background-color: #4e9e3f;
+/* Estilo de los botones */
+button {
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--color1); /* Usando color global */
   color: white;
-}
-
-/* Estilo del paginador */
-mat-paginator {
-  margin-top: 30px;
-  display: flex;
-  justify-content: flex-end;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  padding: 10px 15px;
-}
-
-.mat-paginator-range-label {
-  font-size: 14px;
-  color: #666;
-}
-
-.mat-paginator-icon {
-  color: #4e9e3f;
-  transition: color 0.3s ease;
-}
-
-.mat-paginator-icon:hover {
-  color: #72be61;
-}
-
-/* Botones del paginador */
-mat-paginator button.mat-button {
+  border: none;
   border-radius: 30px;
-  background-color: #4e9e3f;
-  color: #fff;
-  padding: 6px 12px;
-  font-weight: 600;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-mat-paginator button.mat-button:hover {
-  background-color: #72be61;
+button:hover {
+  background-color: var(--color2); /* Usando color global */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsividad */
+button:active {
+  transform: scale(0.98);
+}
+
+/* Responsividad del componente */
 @media (max-width: 768px) {
-  .table-container {
-    padding: 15px;
+  .solar-info-container {
+    padding: var(--space-sm);
   }
 
-  table {
-    font-size: 13px;
+  .solar-header h1 {
+    font-size: 2rem;
   }
 
-  th.mat-header-cell,
-  td.mat-cell {
-    padding: 12px 15px;
-  }
-
-  mat-select {
-    width: 130px;
-    font-size: 12px;
+  mat-accordion {
+    margin-top: var(--space-md);
   }
 }
 
 @media (max-width: 480px) {
-  table {
-    font-size: 12px;
+  .solar-header h1 {
+    font-size: 1.5rem;
   }
 
-  th.mat-header-cell,
-  td.mat-cell {
-    padding: 10px 12px;
+  .buttons-container {
+    flex-direction: column;
+    gap: var(--space-sm);
   }
 
-  .table-container {
-    padding: 10px;
+  button {
+    width: 100%;
+    padding: var(--space-sm) 0;
   }
 }

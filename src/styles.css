@@ -1,26 +1,12 @@
-@font-face {
-  font-family: 'Voltaire Frangela';
-  src: url('./app/assets/fonts/Voltaire-Frangela.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* Variables de color */
 :root {
-  background: url('../src/app/assets/img/fondoglobal.jpg') no-repeat center center fixed;
+  background: url('/assets/img/fondoglobal.jpg') no-repeat center center fixed;
   background-size: cover;
   height: 10vh;
 
   /* Tipografía */
-  --font-family-base: 'Voltaire Frangela', sans-serif; /* Cuerpo del texto */
-  --font-family-heading: 'Voltaire Frangela', sans-serif; /* Títulos */
-
-  /* Colores */
-  --color1: #2a7e1e;
-  --color2: #4e9e3f;
-  --color3: #72be61;
-  --color4: #96df82;
-  --color5: #baffa3;
+  --font-family-base: 'Roboto Condensed', sans-serif; /* Cuerpo del texto */
+  --font-family-heading: 'Roboto Condensed', sans-serif; /* Títulos */
 
   /* Espaciado */
   --space-sm: 8px;
@@ -29,70 +15,26 @@
 }
 
 /* Reset global */
-html, body, div, span, app-root, p, a, li, ul, ol, h1, h2, h3, h4, h5, h6, input, button, textarea, select {
-  font-family: var(--font-family-base), sans-serif !important;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Fondo global */
 html, body {
   height: 100%;
-  background-color: var(--color5);
-  color: var(--color1);
+  margin: 0;
+  font-family: var(--font-family-base);
 }
 
-/* Tipografía para encabezados */
+/* Tipografía base */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family-heading), sans-serif !important;
-  color: var(--color2);
-  margin: var(--space-md) 0;
+  font-family: var(--font-family-heading);
 }
 
-/* Tipografía general */
 p, span, li {
   font-size: 1rem;
   line-height: 1.6;
+  font-family: var(--font-family-base);
 }
 
-/* Contenedor principal */
+/* Espaciado general */
 .container {
   padding: var(--space-md);
   margin: auto;
   max-width: 1200px;
-  background: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Enlaces */
-a {
-  color: var(--color1);
-  text-decoration: none;
-  font-family: var(--font-family-base), sans-serif;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Formularios */
-input, textarea, button, select {
-  font-family: var(--font-family-base), sans-serif;
-  font-size: 1rem;
-  padding: var(--space-sm);
-  border: 1px solid var(--color3);
-  border-radius: 4px;
-  outline: none;
-}
-
-button {
-  background-color: var(--color2);
-  color: #fff;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: var(--color3);
 }
