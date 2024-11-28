@@ -1,26 +1,42 @@
-<div class="filters">
-  <div class="filter">
-    <label for="region">Región</label>
-    <select [(ngModel)]="filter.region" id="region" (change)="updateCharts()">
-      <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
-    </select>
+<div class="dashboard">
+  <h2>Dashboard de Energía Renovable</h2>
+
+  <div class="filters">
+    <div class="filter">
+      <label for="region">Región</label>
+      <select [(ngModel)]="filter.region" id="region" (change)="updateCharts()">
+        <option value="" disabled selected>Selecciona una región</option>
+        <option *ngFor="let region of regions" [value]="region">{{ region }}</option>
+      </select>
+    </div>
+
+    <div class="filter">
+      <label for="year">Año</label>
+      <select [(ngModel)]="filter.year" id="year" (change)="updateCharts()">
+        <option value="" disabled selected>Selecciona un año</option>
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+
+    <button class="clear-filters" (click)="clearFilters()">Limpiar filtros</button>
   </div>
 
-  <div class="filter">
-    <label for="year">Año</label>
-    <select [(ngModel)]="filter.year" id="year" (change)="updateCharts()">
-      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-    </select>
+  <div id="noDataMessage" class="no-data-message">
+    <p>No hay datos disponibles para los filtros seleccionados.</p>
   </div>
-</div>
 
-<div id="noDataMessage" style="display: none;">
-  <p>No hay datos disponibles para los filtros seleccionados.</p>
-</div>
-
-<div class="charts">
-  <canvas id="barChart"></canvas>
-  <canvas id="pieChart"></canvas>
-  <canvas id="lineChart"></canvas>
-  <canvas id="areaChart"></canvas>
+  <div class="charts">
+    <div class="chart">
+      <canvas id="barChart"></canvas>
+    </div>
+    <div class="chart">
+      <canvas id="pieChart"></canvas>
+    </div>
+    <div class="chart">
+      <canvas id="lineChart"></canvas>
+    </div>
+    <div class="chart">
+      <canvas id="areaChart"></canvas>
+    </div>
+  </div>
 </div>

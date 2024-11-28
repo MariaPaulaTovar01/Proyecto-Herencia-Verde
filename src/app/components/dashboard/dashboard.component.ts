@@ -127,9 +127,59 @@ export class DashboardComponent implements OnInit, OnDestroy {
             {
               label: 'Producción (TWh)',
               data: productionData,
-              backgroundColor: ['#2a7e1e', '#4e9e3f', '#72be61', '#96df82', '#baffa3'],
+              backgroundColor: [
+                '#FF6363', // Rojo brillante
+                '#FFB400', // Amarillo brillante
+                '#6B8E23', // Verde oliva
+                '#3B9C9C', // Verde agua
+                '#9B59B6', // Púrpura
+              ],
+              borderColor: [
+                '#FF2A2A', '#FF9C00', '#4B7F4B', '#278F8F', '#8E2E8E'
+              ],
+              borderWidth: 2,
+              hoverBackgroundColor: [
+                '#FF4C4C', '#FFCD00', '#76A14B', '#66B8B8', '#A56BC1'
+              ],
+              hoverBorderColor: [
+                '#D93131', '#FF9F00', '#408740', '#3F9C9C', '#7A3B7A'
+              ],
             },
           ],
+        },
+        options: {
+          responsive: true,
+          animation: {
+            duration: 1500, // Tiempo de animación
+            easing: 'easeOutBounce', // Efecto de rebote
+          },
+          plugins: {
+            legend: {
+              labels: {
+                font: {
+                  size: 14,
+                  family: 'Roboto',
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                font: {
+                  size: 12,
+                },
+              },
+            },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                font: {
+                  size: 12,
+                },
+              },
+            },
+          },
         },
       });
     }
@@ -137,20 +187,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   private createPieChart(data: any[]): void {
     const ctxPie = document.getElementById('pieChart') as HTMLCanvasElement | null;
-
-    // Verificar si los datos están vacíos y loguear la entrada de la función
-    console.log('Creando gráfico de pie con los siguientes datos:', data);
-
-    // Obtener los datos para el gráfico de pie
     const shareData = this.calculationService.getRenewablesShareForPieChart(data);
-
-    // Loguear los datos calculados
-    console.log('Datos calculados para el gráfico de pie:', shareData);
 
     if (ctxPie) {
       if (shareData && shareData.length > 0) {
-        console.log('Datos del gráfico de pie:', shareData); // Verificar los datos antes de crear el gráfico
-
         this.charts['pieChart'] = new Chart(ctxPie, {
           type: 'pie',
           data: {
@@ -158,24 +198,37 @@ export class DashboardComponent implements OnInit, OnDestroy {
             datasets: [
               {
                 data: shareData,
-                backgroundColor: ['#2a7e1e', '#4e9e3f', '#72be61'],
+                backgroundColor: [
+                  '#FF6363', // Rojo brillante
+                  '#FFB400', // Amarillo brillante
+                  '#6B8E23', // Verde oliva
+                ],
+                borderColor: '#FFFFFF',
+                borderWidth: 2,
               },
             ],
           },
+          options: {
+            responsive: true,
+            animation: {
+              duration: 1500,
+              easing: 'easeOutExpo',
+            },
+            plugins: {
+              legend: {
+                labels: {
+                  font: {
+                    size: 14,
+                    family: 'Roboto',
+                  },
+                },
+              },
+            },
+          },
         });
-        console.log('Gráfico de pie creado correctamente.');
-      } else {
-        console.log('No hay datos para el gráfico de pie, mostrando mensaje de no datos.');
-        // Si no hay datos, mostrar el mensaje de "No hay datos"
-        const noDataMessage = document.getElementById('noDataMessage')!;
-        noDataMessage.style.display = 'block'; // Mostrar mensaje de no datos
       }
-    } else {
-      console.log('No se encontró el elemento canvas para el gráfico de pie.');
     }
   }
-
-
 
   private createLineChart(data: any[]): void {
     const ctxLine = document.getElementById('lineChart') as HTMLCanvasElement | null;
@@ -186,10 +239,65 @@ export class DashboardComponent implements OnInit, OnDestroy {
         data: {
           labels: capacityData.labels,
           datasets: [
-            { label: 'Viento', data: capacityData.wind, borderColor: '#2a7e1e' },
-            { label: 'Solar', data: capacityData.solar, borderColor: '#4e9e3f' },
-            { label: 'Geotérmica', data: capacityData.geothermal, borderColor: '#72be61' },
+            {
+              label: 'Viento',
+              data: capacityData.wind,
+              borderColor: '#FF6363',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 3,
+            },
+            {
+              label: 'Solar',
+              data: capacityData.solar,
+              borderColor: '#FFB400',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 3,
+            },
+            {
+              label: 'Geotérmica',
+              data: capacityData.geothermal,
+              borderColor: '#6B8E23',
+              fill: false,
+              tension: 0.4,
+              borderWidth: 3,
+            },
           ],
+        },
+        options: {
+          responsive: true,
+          animation: {
+            duration: 1500,
+            easing: 'easeOutElastic',
+          },
+          plugins: {
+            legend: {
+              labels: {
+                font: {
+                  size: 14,
+                  family: 'Roboto',
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                font: {
+                  size: 12,
+                },
+              },
+            },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                font: {
+                  size: 12,
+                },
+              },
+            },
+          },
         },
       });
     }
@@ -210,6 +318,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
               backgroundColor: 'rgba(42, 126, 30, 0.2)',
               borderColor: '#2a7e1e',
               fill: true,
+              tension: 0.4,
+              borderWidth: 3,
             },
             {
               label: 'Convencional',
@@ -217,10 +327,53 @@ export class DashboardComponent implements OnInit, OnDestroy {
               backgroundColor: 'rgba(78, 158, 63, 0.2)',
               borderColor: '#4e9e3f',
               fill: true,
+              tension: 0.4,
+              borderWidth: 3,
             },
           ],
         },
+        options: {
+          responsive: true,
+          animation: {
+            duration: 1500,
+            easing: 'easeOutElastic',
+          },
+          plugins: {
+            legend: {
+              labels: {
+                font: {
+                  size: 14,
+                  family: 'Roboto',
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              ticks: {
+                font: {
+                  size: 12,
+                },
+              },
+            },
+            y: {
+              beginAtZero: true,
+              ticks: {
+                font: {
+                  size: 12,
+                },
+              },
+            },
+          },
+        },
       });
     }
+  }
+
+
+  // Nueva función para limpiar filtros
+  clearFilters(): void {
+    this.filter = { region: '', year: null };
+    this.updateCharts();
   }
 }

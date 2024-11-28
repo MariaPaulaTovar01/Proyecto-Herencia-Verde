@@ -4,6 +4,8 @@
   background-color: #f8f9fa;
   font-family: 'Roboto', sans-serif;
   color: #333;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 h2 {
@@ -12,31 +14,35 @@ h2 {
   font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 20px;
-  letter-spacing: 1px; /* Mejorar la legibilidad */
+  letter-spacing: 1px;
 }
 
 .filters {
   margin: 20px 0;
   display: flex;
-  flex-direction: column;  /* Cambiar a columna para alinearlo bien en pantallas grandes */
-  align-items: flex-end;   /* Alinear a la derecha */
-  gap: 15px;
-  max-width: 300px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 350px;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.filters:hover {
+  transform: translateY(-5px);
 }
 
 .filters label {
-  font-size: 1rem;  /* Reducir el tamaño de la fuente */
+  font-size: 1.1rem;
   color: #333;
   font-weight: 500;
-  margin-right: 10px;
 }
 
 .filters select,
 .filters input {
-  padding: 8px 12px;
+  padding: 10px 15px;
   font-size: 1rem;
   width: 100%;
-  max-width: 220px;  /* Limitar el ancho para una mejor distribución */
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #fff;
@@ -50,6 +56,21 @@ h2 {
   outline: none;
 }
 
+.clear-filters {
+  background-color: #2a7e1e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.clear-filters:hover {
+  background-color: #4e9e3f;
+}
+
 .no-data-message {
   background-color: #fff;
   border: 1px solid #e0e0e0;
@@ -61,11 +82,13 @@ h2 {
   font-weight: 600;
   margin-top: 20px;
   display: none;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
 }
 
 .charts {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);  /* Dos columnas por defecto */
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   margin-top: 40px;
 }
@@ -84,33 +107,19 @@ h2 {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
-.chart p {
-  margin-top: 15px;
-  font-size: 1rem;
-  color: #555;
-  text-align: center;
-}
-
-/* Colores de fondo para cada gráfico */
-#barChart {
-  background-color: #d3e8d0; /* Fondo verde suave */
-}
-
-#pieChart {
-  background-color: #c1e0d6; /* Fondo verde agua */
-}
-
-#lineChart {
-  background-color: #f0f9e9; /* Fondo verde pálido */
-}
-
-#areaChart {
-  background-color: #e0f1d7; /* Fondo menta suave */
-}
-
 canvas {
   width: 100% !important;
   height: 100% !important;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Media Queries */
@@ -120,14 +129,14 @@ canvas {
   }
 
   .filters {
-    flex-direction: row; /* Los filtros se alinean horizontalmente en pantallas más grandes */
+    flex-direction: row;
     gap: 20px;
     align-items: center;
     max-width: none;
   }
 
   .charts {
-    grid-template-columns: 1fr; /* En pantallas pequeñas, una columna */
+    grid-template-columns: 1fr;
   }
 
   .chart {
@@ -154,5 +163,10 @@ canvas {
 
   .chart {
     height: 250px;
+  }
+
+  .clear-filters {
+    padding: 8px 15px;
+    font-size: 0.9rem;
   }
 }
