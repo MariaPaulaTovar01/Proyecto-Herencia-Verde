@@ -128,21 +128,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
               label: 'Producción (TWh)',
               data: productionData,
               backgroundColor: [
-                '#FF6363', // Rojo brillante
-                '#FFB400', // Amarillo brillante
-                '#6B8E23', // Verde oliva
-                '#3B9C9C', // Verde agua
-                '#9B59B6', // Púrpura
+              '#F9C80E', '#F86624', '#EA3546', '#43BCCD', '#2E933C'
               ],
               borderColor: [
-                '#FF2A2A', '#FF9C00', '#4B7F4B', '#278F8F', '#8E2E8E'
+                '#D9A10C', '#D75420', '#C12E3D', '#38A4B0', '#24812D'
               ],
               borderWidth: 2,
               hoverBackgroundColor: [
-                '#FF4C4C', '#FFCD00', '#76A14B', '#66B8B8', '#A56BC1'
+                '#FFDA3A', '#FF7942', '#FF4D5F', '#5DD9E3', '#41BA50'
               ],
               hoverBorderColor: [
-                '#D93131', '#FF9F00', '#408740', '#3F9C9C', '#7A3B7A'
+                '#E4B91E', '#E36432', '#D93A4C', '#45C4C8', '#31A73A'
               ],
             },
           ],
@@ -199,9 +195,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
               {
                 data: shareData,
                 backgroundColor: [
-                  '#FF6363', // Rojo brillante
-                  '#FFB400', // Amarillo brillante
-                  '#6B8E23', // Verde oliva
+                   '#F9C80E', '#F86624', '#43BCCD'
                 ],
                 borderColor: '#FFFFFF',
                 borderWidth: 2,
@@ -242,7 +236,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             {
               label: 'Viento',
               data: capacityData.wind,
-              borderColor: '#FF6363',
+              borderColor: '#43BCCD',
               fill: false,
               tension: 0.4,
               borderWidth: 3,
@@ -250,7 +244,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             {
               label: 'Solar',
               data: capacityData.solar,
-              borderColor: '#FFB400',
+              borderColor: '#F9C80E',
               fill: false,
               tension: 0.4,
               borderWidth: 3,
@@ -258,7 +252,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
             {
               label: 'Geotérmica',
               data: capacityData.geothermal,
-              borderColor: '#6B8E23',
+              borderColor: '#F86624',
               fill: false,
               tension: 0.4,
               borderWidth: 3,
@@ -316,7 +310,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
               label: 'Renovable',
               data: energyData.renewable,
               backgroundColor: 'rgba(42, 126, 30, 0.2)',
-              borderColor: '#2a7e1e',
+              borderColor: '#2E933C',
               fill: true,
               tension: 0.4,
               borderWidth: 3,
@@ -325,7 +319,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
               label: 'Convencional',
               data: energyData.conventional,
               backgroundColor: 'rgba(78, 158, 63, 0.2)',
-              borderColor: '#4e9e3f',
+              borderColor: '#EA3546',
               fill: true,
               tension: 0.4,
               borderWidth: 3,
