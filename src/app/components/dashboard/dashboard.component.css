@@ -1,4 +1,3 @@
-
 .dashboard {
   padding: 40px;
   background: url('./../../assets/img/fondodash1.jpg') no-repeat center center;
@@ -112,7 +111,6 @@ h2 {
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-top: 30px;
-  
 }
 
 .chart {
@@ -130,7 +128,7 @@ h2 {
 
 canvas {
   width: 100%;
-  height: 100%;
+  height: auto; /* Ajusta la altura automáticamente para mantener proporción */
 }
 
 /* Animación */
@@ -146,8 +144,55 @@ canvas {
 }
 
 /* Media Queries */
+@media (max-width: 1024px) {
+  .charts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard {
+    padding: 30px;
+  }
+}
+
 @media (max-width: 768px) {
   .charts {
+    grid-template-columns: 1fr; /* Gráficas en una sola columna */
+  }
+
+  .dashboard {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .charts {
     grid-template-columns: 1fr;
+    gap: 15px; /* Reduce el espacio entre las gráficas */
+  }
+
+  .chart {
+    padding: 15px; /* Reduce el padding dentro de cada gráfica */
+  }
+
+  canvas {
+    max-width: 100%; /* Asegura que el lienzo no se desborde */
+    height: auto; /* Ajusta la altura proporcionalmente */
+  }
+
+  .dashboard {
+    padding: 15px; /* Reduce el padding general */
+  }
+
+  h2 {
+    font-size: 2rem; /* Reduce el tamaño del título */
+  }
+
+  .filters {
+    flex-direction: column; /* Cambia los filtros a una sola columna */
+    gap: 15px; /* Ajusta el espacio entre filtros */
+  }
+
+  .filters .filter {
+    width: 100%;
   }
 }
