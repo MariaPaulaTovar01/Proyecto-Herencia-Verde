@@ -1,0 +1,237 @@
+
+/* Contenedor principal */
+.calculator-container {
+  max-width: 500px;
+  margin: var(--space-lg) auto;
+  padding: var(--space-md);
+  background-color: var(--color-light-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: var(--font-family-base);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.calculator-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Título */
+h2 {
+  text-align: center;
+  color: var(--color-primary);
+  font-size: 24px;
+  margin-bottom: var(--space-md);
+  font-weight: bold;
+}
+
+/* Inputs */
+.input-container {
+  margin-bottom: var(--space-md);
+}
+
+input {
+  width: 100%;
+  padding: var(--space-sm);
+  border: 1px solid var(--color-light-border);
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 8px rgba(78, 158, 63, 0.4);
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(90deg, #2a7e1e, #4e9e3f);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background: linear-gradient(90deg, #4e9e3f, #72be61);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: scale(0.98);
+  background: #4e9e3f;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+  box-shadow: none;
+  color: #aaa;
+}
+
+
+/* Mensajes */
+.result-container {
+  margin-top: var(--space-md);
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-success);
+}
+
+.success-message {
+  margin-top: var(--space-md);
+  padding: var(--space-sm);
+  background-color: var(--color-success);
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.error-message {
+  margin-top: var(--space-md);
+  color: var(--color-error);
+  background-color: var(--color-error-bg);
+  padding: var(--space-sm);
+  border: 1px solid var(--color-error);
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Footer */
+footer {
+  background-color: var(--color-footer);
+  color: white;
+  text-align: center;
+  padding: var(--space-md);
+  font-size: 14px;
+  margin-top: var(--space-lg);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .calculator-container {
+    padding: var(--space-sm);
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  button {
+    font-size: 14px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 18px;
+  }
+
+  button {
+    padding: var(--space-sm);
+  }
+}
+
+
+
+/* Contenedor principal que ocupa el 100% del ancho de la página */
+.project-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adaptable a diferentes tamaños de pantalla */
+  gap: 20px; /* Espaciado entre las tarjetas */
+  padding: 0 20px; /* Relleno lateral para que no toquen los bordes */
+  width: 100%; /* Asegura que ocupe todo el ancho */
+  box-sizing: border-box; /* Incluye el relleno en el cálculo del ancho */
+  margin: 0 auto; /* Asegura que se centre */
+}
+
+
+
+
+/* Estilos generales */
+/* Estilos generales */
+.container {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.left-section {
+  position: relative;
+  flex: 1;
+  background-image: url('../../assets/img/card-min.jpg'); /* Ruta de tu imagen */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+/* Capa semitransparente encima de la imagen para oscurecerla */
+.left-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Negro con 50% de opacidad */
+  z-index: 1; /* Asegura que la capa se superponga a la imagen */
+}
+
+
+.right-section {
+  flex: 1;
+  background-color: #fff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.features {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.feature {
+  width: 45%;
+  text-align: center;
+}
+
+.feature img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.feature h2 {
+  font-size: 1.5em;
+  color: #4CAF50;
+  margin-bottom: 10px;
+}
+
+.feature p {
+  font-size: 1em;
+  color: #555;
+}

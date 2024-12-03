@@ -1,1 +1,60 @@
-<p>consumption-calculator works!</p>
+<div class="calculator-container">
+  <h2>Calculadora de Consumo de Energía</h2>
+
+  <div class="input-container">
+    <label for="monthly-consumption">Consumo mensual en kWh:</label>
+    <input
+      id="monthly-consumption"
+      type="number"
+      [(ngModel)]="monthlyConsumption"
+      (ngModelChange)="onConsumptionChange()"
+      placeholder="Ingresa el consumo mensual en kWh"
+    />
+  </div>
+  
+
+  <div class="button-container">
+    <button (click)="calculatePercentage()">Calcular</button>
+  </div>
+
+  <!-- Mostrar el porcentaje calculado si existe -->
+  <div *ngIf="percentage !== null" class="result-container">
+    <p>
+      El porcentaje de la producción solar de Colombia 2021 que representa tu
+      consumo anual es: <strong>{{ percentage | number: '1.2-2' }}%</strong>
+    </p>
+  </div>
+
+  <!-- Mostrar el mensaje de éxito si está disponible -->
+  <div *ngIf="successMessage" class="success-message">
+    <p>{{ successMessage }}</p>
+  </div>
+
+  <!-- Mostrar el mensaje de error si existe -->
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="left-section">
+      <!-- Imagen de fondo relacionada con la energía solar -->
+  </div>
+  <div class="right-section">
+      <h1>Futuro Sostenible con Energía Solar</h1>
+      <div class="features">
+          <div class="feature">
+              <img src="../../assets/img/card1cal.png" alt="Icono de energía solar"> <!-- Ruta al icono de energía solar -->
+              <h2>Beneficios Económicos</h2>
+              <p>La energía solar reduce los costos energéticos a largo plazo y proporciona ahorro en las facturas eléctricas.</p>
+          </div>
+          <div class="feature">
+              <img src="../../assets/img/card2cal.png" alt="Icono de impacto ambiental"> <!-- Ruta al icono de impacto ambiental -->
+              <h2>Impacto Ambiental Positivo</h2>
+              <p>Contribuye a reducir las emisiones de carbono y protege el medio ambiente, creando un futuro más limpio y verde.</p>
+          </div>
+      </div>
+  </div>
+</div>

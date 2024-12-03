@@ -1,10 +1,12 @@
-/* src/styles.css */
-
 /* Variables de color */
 :root {
+  background: url('/assets/img/fondoglobal.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 10vh;
+
   /* Tipografía */
-  --font-family-base: 'BauhausModern', 'Roboto', "Helvetica Neue", sans-serif;
-  --font-family-heading: 'BauhausModern', 'Roboto', sans-serif;
+  --font-family-base: 'Roboto Condensed', sans-serif; /* Cuerpo del texto */
+  --font-family-heading: 'Roboto Condensed', sans-serif; /* Títulos */
 
   /* Espaciado */
   --space-sm: 8px;
@@ -17,19 +19,17 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: var(--font-family-base);
-  background-color: var(--color5);
-  color: var(--color1);
 }
 
 /* Tipografía base */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-heading);
-  color: var(--color2);
 }
 
 p, span, li {
   font-size: 1rem;
   line-height: 1.6;
+  font-family: var(--font-family-base);
 }
 
 /* Espaciado general */
