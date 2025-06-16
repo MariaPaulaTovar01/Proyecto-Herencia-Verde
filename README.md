@@ -1,27 +1,49 @@
-# ProyectoCertificacion
+# 🌿 Herencia Verde
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.12.
+**Herencia Verde** es un sitio web educativo desarrollado en Angular que busca informar y concientizar sobre distintos tipos de **energías renovables**, su impacto ambiental y su uso en la vida cotidiana.
 
-## Development server
+Este proyecto fue desarrollado como parte de una certificación académica, en colaboración con un equipo de estudiantes apasionados por la tecnología y el medio ambiente.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🌐 Enlace al sitio web
 
-## Code scaffolding
+🔗 [herencia-verde.netlify.app](https://herencia-verde.netlify.app/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 🚀 Tecnologías utilizadas
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- [Angular CLI](https://github.com/angular/angular-cli) versión 18.2.12
+- HTML5 / CSS3
+- TypeScript
+- Netlify (para el despliegue)
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🧩 Funcionalidades principales
 
-## Running end-to-end tests
+- Información categorizada sobre tipos de energías limpias.
+- Diseño responsive y modular.
+- Componentes reusables.
+- Buenas prácticas en estructura de carpetas y desarrollo Angular.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+## 👥 Equipo de desarrollo
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Proyecto creado con dedicación por:
+
+- [@JulianEmilioSuazaPerez](https://github.com/JulianEmilioSuazaPerez)
+- [@CrisMonte12](https://github.com/CrisMonte12)
+- [@MariaPaulaTovar01](https://github.com/MariaPaulaTovar01)
+- [@DavidOrtiz0](https://github.com/DavidOrtiz0)
+
+---
+
+## 📦 Scripts disponibles
+
+### ▶️ Development server
+
+Ejecuta:
+
+```bash
+ng serve
